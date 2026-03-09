@@ -1,0 +1,22 @@
+{
+  "name": "agent-skills",
+  "owner": {
+    "name": "Zhenguo Zhang"
+    "email": "zhangz.sci@gmail.com"
+  },
+  "metadata": {
+    "description": "A collection of Agent Skills for data science",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "r-lib",
+      "description": "Collection of skills for R package developers",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./r-lib/learn-R",
+      ]
+    },
+  ]
+}
