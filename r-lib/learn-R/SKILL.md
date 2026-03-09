@@ -1,149 +1,180 @@
 ---
 name: learn-R
 description: >
-    Learn R packages and functions by generating context with the
-    `btw` package. Use `btw::btw()` to create plain-text descriptions
-    of R objects, functions, and documentation that can be used as
-    prompts for AI agents. This skill provides examples and best
-    practices for using `btw` to enhance your learning experience with
-    R.
-
-metadata:
-  author: Zhenguo Zhang
-  version: 1.0
-license: MIT
+  Learn R packages and functions by generating context with the `btw` package. 
+  ALWAYS use this skill when the user wants to learn about R packages, functions, 
+  or workflows; asks how to use specific R functions; needs examples with their 
+  data; or wants to generate prompts for AI assistants about R code. Make sure 
+  to suggest `btw()` whenever the user is working with R and needs guidance, 
+  even if they don't explicitly mention the btw package. Use `btw::btw()` to 
+  create plain-text descriptions of R objects that serve as contextual prompts 
+  for AI agents.
+compatibility: Requires R with the `btw` package. For AI chat integration, 
+  requires the `ellmer` package.
 ---
 
-## Overview
+# Learn R Packages and Functions with btw
 
-This skill provides guidance on using the `btw` package to generate context for learning R packages and functions. The `btw::btw()` function creates plain-text descriptions of R objects (data frames, functions, package documentation) that can be used as prompts for AI agents.
+## When to Use This Skill
 
-**Key use cases:**
-- Learning how to use specific R functions or packages
-- Generating contextual prompts for AI assistants
-- Documenting computational environments for LLM interactions
-- Creating reproducible context for code generation tasks
+Use this skill whenever the user:
+
+- **Asks how to use an R function or package** - Generate context with `btw()` including the function and relevant data
+- **Wants examples with their data** - Use `btw()` to describe their dataset along with the function
+- **Needs to learn a new R package** - Combine `btw_tool_docs_package_help_topics()` with key functions
+- **Is debugging R code** - Include the function, error condition, and their code in `btw()`
+- **Requests AI assistance with R** - Generate contextual prompts using `btw()` for better AI responses
+- **Compares related functions** - Use `btw()` with multiple functions to get comparative guidance
+
+**Do not wait for the user to ask about `btw`** - proactively suggest it when they're working with R and need learning support.
 
 ---
 
+## Instructions for Claude
 
-## Basic Usage
+When helping users learn R, follow this workflow:
 
-### Describe Objects in Your Environment
+### 1. Identify the Learning Goal
 
+Determine what the user wants to learn:
+- A specific function (e.g., `dplyr::across()`)
+- A package (e.g., `tidyr`)
+- A workflow (e.g., data transformation pipeline)
+- Debugging help with existing code
+
+### 2. Gather Context with btw()
+
+Generate appropriate context using `btw::btw()`:
+
+**For single functions:**
 ```r
-# Describe all objects in your workspace
-btw::btw()
-```
-
-### Describe Specific Functions and Data
-
-```r
-# Describe a function and a dataset
 btw::btw(dplyr::mutate, mtcars)
-
-# Describe multiple objects
-btw::btw(dplyr::across, dplyr::starwars, tidyr::pivot_longer)
 ```
 
-### Include Vignettes and Documentation
+**For package learning:**
+```r
+btw::btw(
+  btw_tool_docs_package_help_topics("dplyr"),
+  dplyr::filter,
+  dplyr::select
+)
+```
+
+**For comparative learning:**
+```r
+btw::btw(dplyr::summarise, dplyr::mutate)
+```
+
+### 3. Provide the Generated Context
+
+Explain to the user that `btw()` has generated context they can:
+- **Copy to clipboard** (default behavior when run interactively)
+- **Paste into AI chat** for contextual responses
+- **Use with ellmer** for integrated AI chat sessions
+
+### 4. Suggest Follow-up Actions
+
+After generating context, suggest:
+- Running the generated prompt with their AI assistant
+- Exploring related functions with additional `btw()` calls
+- Using `btw_tool_*()` functions for more specific documentation
+
+---
+
+## Core Usage Patterns
+
+### Basic Context Generation
 
 ```r
-# Include package vignettes
+# Describe all objects in workspace
+btw::btw()
+
+# Describe a function with data
+btw::btw(dplyr::across, dplyr::starwars)
+
+# Include vignettes
 btw::btw(vignette("colwise", "dplyr"))
-
-# Include help pages
-btw::btw(help = "dplyr::across")
 ```
 
----
-
-
-### Interactive Workflow
+### AI Chat Integration
 
 ```r
-# Copy context to clipboard for pasting into chat interface
-btw::btw(dplyr::mutate, mtcars, clipboard = TRUE)
-# Result is automatically copied to clipboard
+library(ellmer)
+library(btw)
+
+# Create chat session
+chat <- chat_anthropic()  # or chat_ollama(model = "llama3.1:8b")
+
+# Chat with context
+chat$chat(
+  btw(
+    dplyr::across,
+    dplyr::starwars,
+    "Create examples using dplyr::across() with starwars"
+  )
+)
 ```
 
----
+### Specialized Documentation Tools
 
-## btw Tool Functions
-
-Use specialized `btw_tool_*()` functions for fine-grained control:
-
-### Package Help Topics
+Use `btw_tool_*()` functions for fine-grained control:
 
 ```r
-# Get help topics for a package
-btw::btw_tool_docs_package_help_topics("dplyr")
-```
+# Package help topics
+btw::btw_tool_docs_package_help_topics("tidyr")
 
-### Help Pages
-
-```r
-# Get specific help page
+# Specific help page
 btw::btw_tool_docs_help_page("dplyr::across")
-```
 
-### Function Documentation
-
-```r
-# Get function documentation
-btw::btw_tool_docs_function("dplyr", "across")
-```
-
-### Vignettes
-
-```r
-# Get vignette content
-btw::btw_tool_docs_vignette("dplyr", "colwise")
+# Vignette content
+btw::btw_tool_docs_vignette("dplyr", "base")
 ```
 
 ---
 
-## Common Patterns
+## Learning Workflows
 
 ### Learning a New Package
 
+**Step 1:** Get package overview
 ```r
-# Get comprehensive context for learning a package
+btw::btw(btw_tool_docs_package_help_topics("ggplot2"))
+```
+
+**Step 2:** Explore key functions
+```r
+btw::btw(ggplot2::ggplot, ggplot2::aes, mtcars)
+```
+
+**Step 3:** Request examples
+```r
 btw::btw(
-  btw_tool_docs_package_help_topics("tidyr"),
-  tidyr::pivot_longer,
-  tidyr::pivot_wider,
-  "Explain the key concepts of tidyr and when to use pivot operations"
+  ggplot2::ggplot,
+  ggplot2::geom_point,
+  mtcars,
+  "Show me 3 ways to plot mpg vs wt"
 )
 ```
 
 ### Understanding Function Relationships
 
+Compare related functions to understand when to use each:
+
 ```r
-# Compare related functions
 btw::btw(
   dplyr::summarise,
   dplyr::mutate,
-  "What is the difference between summarise() and mutate()? When should I use each?"
+  "What is the difference? When should I use each?"
 )
 ```
 
-### Getting Examples
+**Why this works:** By including both functions in the same `btw()` call, the AI can compare their purposes, syntax, and use cases directly.
+
+### Debugging with Context
+
+Include error context for better AI assistance:
 
 ```r
-# Request examples with context
-btw::btw(
-  ggplot2::ggplot,
-  ggplot2::aes,
-  mtcars,
-  "Show me 3 different ways to visualize the relationship between mpg and wt"
-)
-```
-
-### Debugging Help
-
-```r
-# Get help with debugging
 btw::btw(
   my_function,
   error_condition,
@@ -151,77 +182,66 @@ btw::btw(
 )
 ```
 
----
-
-## Advanced Usage
-
-### Custom Context Building
-
-```r
-# Build complex context programmatically
-context <- c(
-  btw_tool_docs_help_page("dplyr::filter"),
-  btw_tool_docs_help_page("dplyr::select"),
-  "Create a workflow that combines filtering and selecting"
-)
-
-btw::btw(!!!context)
-```
-
-### Multiple Packages
-
-```r
-# Learn about package interactions
-btw::btw(
-  dplyr::filter,
-  tidyr::drop_na,
-  ggplot2::ggplot,
-  "Show me a complete workflow from data cleaning to visualization"
-)
-```
-
-### Clipboard Control
-
-```r
-# Disable clipboard copying
-result <- btw::btw(mtcars, clipboard = FALSE)
-
-# Access the text content
-content <- as.character(result)
-```
+**Why this works:** The AI sees both your code and the error structure, enabling targeted debugging advice.
 
 ---
 
 ## Best Practices
 
-### 1. Be Specific About What You Want to Learn
+### Be Specific About Learning Goals
 
+**Effective:**
 ```r
-# Good: Specific learning goal
 btw::btw(
   dplyr::group_by,
   dplyr::summarise,
   "Show me how to calculate summary statistics by group"
 )
+```
 
-# Less helpful: Too vague
+**Less effective (too vague):**
+```r
 btw::btw(dplyr, "Teach me dplyr")
 ```
 
-### 2. Include Relevant Data
+**Why:** Specific goals help the AI provide targeted, actionable examples rather than generic documentation.
 
+### Include Your Actual Data
+
+**Effective:**
 ```r
-# Good: Include the actual data you're working with
-btw::btw(my_data_frame, dplyr::filter, "How do I filter this data?")
+btw::btw(my_data, dplyr::filter, "How do I filter rows where x > 5?")
+```
 
-# Less helpful: No context
+**Less effective (no context):**
+```r
 btw::btw(dplyr::filter, "How do I filter?")
 ```
 
-### 3. Combine Documentation with Examples
+**Why:** AI can provide relevant examples when it understands your data structure.
+
+### Use Incremental Learning
+
+Start with basics, then explore advanced features:
 
 ```r
-# Good: Documentation + data + specific question
+# Step 1: Basics
+btw::btw(dplyr::select, "Explain the basics")
+
+# Step 2: Helper functions
+btw::btw(
+  dplyr::select,
+  dplyr::starts_with,
+  dplyr::ends_with,
+  "Show me helper functions for column selection"
+)
+```
+
+**Why:** Building knowledge incrementally prevents overwhelm and creates stronger mental models.
+
+### Combine Documentation with Questions
+
+```r
 btw::btw(
   help = "tidyr::pivot_longer",
   my_wide_data,
@@ -229,68 +249,7 @@ btw::btw(
 )
 ```
 
-### 4. Use Incremental Learning
-
-```r
-# Start with basics
-btw::btw(dplyr::select, "Explain the basics of select()")
-
-# Then explore advanced features
-btw::btw(
-  dplyr::select,
-  dplyr::starts_with,
-  dplyr::ends_with,
-  "Show me helper functions for selecting multiple columns"
-)
-```
-
----
-
-## Workflow Examples
-
-### Learning Data Transformation
-
-```r
-library(btw)
-
-# Get context for learning dplyr transformations
-chat_prompt <- btw(
-  vignette("base", "dplyr"),
-  dplyr::mutate,
-  dplyr::filter,
-  dplyr::select,
-  mtcars,
-  "Create a step-by-step tutorial for data transformation with dplyr"
-)
-```
-
-### Learning Visualization
-
-```r
-# Get context for learning ggplot2
-chat_prompt <- btw(
-  ggplot2::ggplot,
-  ggplot2::geom_point,
-  ggplot2::geom_smooth,
-  ggplot2::facet_wrap,
-  mtcars,
-  "Teach me the grammar of graphics using ggplot2"
-)
-```
-
-### Learning Statistical Modeling
-
-```r
-# Get context for learning modeling
-chat_prompt <- btw(
-  stats::lm,
-  stats::glm,
-  broom::tidy,
-  broom::glance,
-  mtcars,
-  "Explain linear modeling in R and how to interpret results"
-)
-```
+**Why:** The AI has both the function documentation AND your specific data, enabling personalized guidance.
 
 ---
 
@@ -298,39 +257,37 @@ chat_prompt <- btw(
 
 ### Objects Not Found
 
+If `btw()` can't find an object:
+
 ```r
-# Ensure packages are loaded
+# Ensure package is loaded
 library(dplyr)
 btw::btw(dplyr::across)
 
-# Or use :: notation
+# Or use :: notation directly
 btw::btw(dplyr::across)
 ```
 
-### Large Output
+### Output Too Large
+
+Focus on specific functions rather than entire packages:
 
 ```r
-# Focus on specific functions rather than entire packages
-btw::btw(dplyr::filter, dplyr::select)  # Good
-btw::btw(dplyr)  # May be too much
+# Good: Specific functions
+btw::btw(dplyr::filter, dplyr::select)
+
+# Too broad: Entire package
+btw::btw(dplyr)
 ```
 
 ### Clipboard Issues
 
+Disable clipboard and capture output manually:
+
 ```r
-# Disable clipboard and capture output
 result <- btw::btw(mtcars, clipboard = FALSE)
 print(result)
 ```
-
----
-
-## Related Resources
-
-- **btw package documentation:** `?btw::btw`
-- **btw GitHub:** https://posit-dev.github.io/btw/
-- **ellmer package:** For AI chat integration
-- **R for Data Science:** https://r4ds.hadley.nz/
 
 ---
 
@@ -349,10 +306,18 @@ print(result)
 
 ---
 
-## Tips for AI Agent Learning
+## Related Resources
 
-1. **Start with fundamentals:** Begin with core functions before advanced features
-2. **Include your data:** AI can provide more relevant help with actual data context
-3. **Ask for examples:** Request multiple examples with varying complexity
-4. **Iterate:** Use follow-up questions to deepen understanding
-5. **Save good prompts:** Keep effective `btw()` calls for future learning sessions
+- **btw package:** `?btw::btw` or https://posit-dev.github.io/btw/
+- **ellmer package:** AI chat integration
+- **R for Data Science:** https://r4ds.hadley.nz/
+
+---
+
+## Tips for Effective AI-Assisted Learning
+
+1. **Start with fundamentals** - Begin with core functions before advanced features
+2. **Include your data** - AI provides more relevant help with actual data context
+3. **Ask for examples** - Request multiple examples with varying complexity
+4. **Iterate** - Use follow-up questions to deepen understanding
+5. **Save good prompts** - Keep effective `btw()` calls for future reference

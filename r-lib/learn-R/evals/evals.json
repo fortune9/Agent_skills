@@ -1,0 +1,29 @@
+{
+  "skill_name": "learn-R",
+  "evals": [
+    {
+      "id": 1,
+      "eval_name": "learn-specific-function",
+      "prompt": "I'm working with the starwars dataset and need to use dplyr::across() to calculate mean values for multiple numeric columns grouped by species. Can you help me understand how to use across() for this?",
+      "expected_output": "Should generate btw() context including dplyr::across, dplyr::starwars, and the specific learning goal. Should explain how to use btw() to get AI assistance with across() syntax and examples.",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 2,
+      "eval_name": "learn-new-package",
+      "prompt": "I keep hearing about the tidyr package but I'm not sure when to use pivot_longer vs pivot_wider. Can you help me learn the key concepts?",
+      "expected_output": "Should suggest using btw() with tidyr documentation and both pivot functions. Should generate context that compares the two functions and explains when to use each.",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 3,
+      "eval_name": "debug-with-context",
+      "prompt": "I have this R function that's giving me an error: 'Error in mutate: incompatible size'. I'm using dplyr::mutate() on my data frame. How can I figure out what's wrong?",
+      "expected_output": "Should suggest using btw() to include the function, error condition, and mutate documentation. Should explain how to generate contextual prompts for debugging with AI assistance.",
+      "files": [],
+      "assertions": []
+    }
+  ]
+}
