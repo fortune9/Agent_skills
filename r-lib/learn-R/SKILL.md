@@ -25,8 +25,20 @@ Use this skill whenever the user:
 - **Is debugging R code** - Include the function, error condition, and their code in `btw()`
 - **Requests AI assistance with R** - Generate contextual prompts using `btw()` for better AI responses
 - **Compares related functions** - Use `btw()` with multiple functions to get comparative guidance
+- **Wants to create documentation or tutorials** - Use `btw()` to generate examples and explanations for .Rmd or .md files
 
 **Do not wait for the user to ask about `btw`** - proactively suggest it when they're working with R and need learning support.
+
+
+---
+
+## Determine the Learning Mode
+
+Ask yourself or the user:
+- **Interactive learning**: User wants to explore functions/packages hands-on → Use `btw()`
+- **Documentation creation**: User wants a written tutorial/reference → Create .Rmd or .md
+- **Concept explanation**: User needs to understand how something works → Explain + examples
+- **Comparison**: User wants to compare packages/approaches → Side-by-side examples
 
 ---
 
@@ -44,7 +56,9 @@ Determine what the user wants to learn:
 
 ### 2. Gather Context with btw()
 
-Generate appropriate context using `btw::btw()`:
+Generate appropriate context using `btw::btw()` or `R -e
+"btw::btw(...)"` for command-line usage. Include relevant functions,
+data, and specific questions.:
 
 **For single functions:**
 ```r
@@ -250,6 +264,13 @@ btw::btw(
 ```
 
 **Why:** The AI has both the function documentation AND your specific data, enabling personalized guidance.
+
+---
+
+## Creating Documentation and Tutorials
+
+Refer to the file ./references/create-document.md for suggested format.
+
 
 ---
 
