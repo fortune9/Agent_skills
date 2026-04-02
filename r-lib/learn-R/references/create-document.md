@@ -38,3 +38,7 @@
   - Official docs
   - Vignettes
   - Community resources
+
+9. Output formats
+  - github document as default
+  - other formats specified by user
