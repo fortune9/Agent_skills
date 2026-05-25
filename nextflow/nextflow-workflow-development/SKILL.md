@@ -53,7 +53,7 @@ Located in `subworkflows/<namespace>/`, these are composable units with:
 - Reusable across workflows
 - Own test suites
 
-Example: `subworkflows/exact-nf/read_samplesheet/main.nf`
+Example: `subworkflows/my-org/read_samplesheet/main.nf`
 
 ## Workflow Structure
 
@@ -346,7 +346,7 @@ ch_results
 Workflows and subworkflows use nf-test. Reference `references/nf-test-reference.md` for comprehensive testing documentation.
 
 ```
-subworkflows/exact-nf/my_subworkflow/
+subworkflows/my-org/my_subworkflow/
 ├── main.nf
 ├── meta.yml
 └── tests/
@@ -685,7 +685,7 @@ Wait until ALL files are complete and tests pass before committing:
 ```bash
 # Stage workflow files
 git add workflows/my_workflow.nf
-git add subworkflows/exact-nf/my_subworkflow/
+git add subworkflows/my-org/my_subworkflow/
 
 # Comprehensive commit message
 git commit -m "feat: add my_workflow with subworkflow
@@ -695,7 +695,7 @@ git commit -m "feat: add my_workflow with subworkflow
   - Dual-source parameter handling
   - Supports single-end and paired-end modes
 
-- Add subworkflows/exact-nf/my_subworkflow/
+- Add subworkflows/my-org/my_subworkflow/
   - Orchestrates MODULE_1 and MODULE_2
   - Handles optional parameters
   - Joins results by sample ID

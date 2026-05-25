@@ -73,9 +73,9 @@ Look at existing modules in the codebase for patterns:
 - Output naming conventions
 
 Common reference modules:
-- `modules/exact-nf/fastq/split/` - Multiple outputs, file splitting
-- `modules/exact-nf/fastq/sampling/` - Dual-source parameters, deterministic operations
-- `modules/exact-nf/fastq/fastqc/` - Simple tool wrapper
+- `modules/my-org/fastq/split/` - Multiple outputs, file splitting
+- `modules/my-org/fastq/sampling/` - Dual-source parameters, deterministic operations
+- `modules/my-org/fastq/fastqc/` - Simple tool wrapper
 
 ### 3. Create Directory Structure
 
@@ -531,6 +531,6 @@ Better to clarify upfront than iterate multiple times!
 ## Example Modules to Study
 
 In the current codebase:
-- `modules/exact-nf/fastq/split/` - File splitting, multiple outputs
-- `modules/exact-nf/fastq/sampling/` - Parameter handling, deterministic seeding
-- `modules/exact-nf/fastq/fastqc/` - Simple wrapper pattern
+- `modules/my-org/fastq/split/` - File splitting, multiple outputs
+- `modules/my-org/fastq/sampling/` - Parameter handling, deterministic seeding
+- `modules/my-org/fastq/fastqc/` - Simple wrapper pattern
