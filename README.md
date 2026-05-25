@@ -19,6 +19,35 @@ R package development skills for working with the r-lib ecosystem and modern R w
   - Best practices for learning R with AI assistants
   - Workflow examples for data transformation, visualization, and statistical modeling
 
+### Nextflow Development Skills
+
+Comprehensive guide for creating production-ready Nextflow DSL2 modules, subworkflows, and workflows following nf-core conventions.
+
+- **[nextflow-module-development](./nextflow/nextflow-module-development/)** - Create or modify Nextflow DSL2 modules following nf-core conventions. Covers:
+  - Creating new Nextflow process modules
+  - Wrapping existing scripts (bash, R, Python) in modules
+  - Comprehensive testing with the nf-test framework
+  - Following nf-core structure and best practices
+  - Debugging parameter handling and file I/O
+
+- **[nextflow-workflow-development](./nextflow/nextflow-workflow-development/)** - Create Nextflow DSL2 workflows and subworkflows. Covers:
+  - Workflow orchestration and reusable subworkflows
+  - Complex channel operations and samplesheet parsing
+  - Pipeline building and parameter handling
+  - Testing full workflows and subworkflows with nf-test
+  - Integration of modules into production-ready pipelines
+
+### Programming & AI Methodology
+
+Guidelines and best practices for modern software development and AI-assisted coding.
+
+- **[zz-vibe-coding](./programming/zz-vibe-coding/)** - Guidelines for coding with AI assistance based on the vibe coding methodology. This skill helps you write better code by providing a systematic approach to AI-assisted development. Covers:
+  - Architecture-first design for complex tasks
+  - Systematic planning and roadmap creation
+  - Modular code organization and incremental testing
+  - Context management for AI agents
+  - Surgical code editing and maintenance
+
 ---
 
 ## Installation
@@ -133,6 +162,8 @@ This repository organizes skills into categories to make it easier to find and i
 | Category | Description |
 | --------------- | ----------------------------------------------------------- |
 | **r-lib** | R package development and learning workflows with the r-lib ecosystem |
+| **nextflow** | Nextflow DSL2 module and workflow development following nf-core conventions |
+| **programming** | Modern development methodologies and AI-assisted coding workflows |
 
 ---
 
