@@ -1,0 +1,23 @@
+{
+  "skill_name": "learn-anything",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "I keep seeing people use dplyr in R but I've never used it. Can you teach me the basics? I'm mainly interested in filtering and grouping data.",
+      "expected_output": "A tutorial with installation, key concepts (verbs, pipes), key functions in a table (filter, select, mutate, group_by, summarize), and a complete working example. Should be .Rmd format to show R output.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "I need to learn how to use the aws cli for S3. I have it installed already but don't know the commands. Focus on uploading, downloading, and listing files.",
+      "expected_output": "A tutorial covering S3 commands (aws s3 ls, cp, sync, rm), presented in a table with examples. Full working example of managing files in S3. Should be .md format (no code execution needed).",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "can you teach me plotly for python? i want to make interactive plots for my data analysis dashboard",
+      "expected_output": "A tutorial with plotly.express and plotly.graph_objects basics, key functions for different chart types, a full example building an interactive dashboard plot. Should be .Rmd or .ipynb equivalent (showing plots).",
+      "files": []
+    }
+  ]
+}
