@@ -1,6 +1,7 @@
 ---
 name: zz-vibe-coding
-description: Guidelines for coding with AI assistance based on Zhenguo's vibe coding methodology. ONLY use this skill when the user EXPLICITLY requests it (e.g., "use zz-vibe-coding", "apply vibe coding", "/zz-vibe-coding"). Do NOT trigger automatically - this is for testing only.
+description: Zhenguo's vibe coding methodology — the process to follow when starting ANY coding task. Use this FIRST, before any language-specific or implementation skill, whenever the task involves planning, writing, revising, refactoring, debugging, or testing code (Python, R, bash, or any language). It sets the overall approach (architecture, plan, small steps, tests); language skills like python-coding or learn-r plug in afterward for language details. Apply before writing or editing any code.
+disable-model-invocation: false
 ---
 
 # Vibe Coding Guidelines
@@ -26,9 +27,16 @@ Before writing any code, assess the task complexity:
 
 - **Simple tasks** (single function): Go ahead and implement directly
 - **Complex tasks** (multiple components): Design the architecture first
+  - Ask the user for requirements and constraints, including:
+    * Input and output formats
+    * The strategy to parse input efficiently, such as read into
+      memory or stream line by line, if applicable
+    * The overall strategy for the task, including any algorithms or
+      data structures to use
   - Break down into clear, modular subtasks
   - Define interfaces between components
   - Explain the overall strategy before implementing
+  - Use diagrams or pseudocode if helpful to clarify the design
 
 **Why this matters**: Starting to code without a plan leads to convoluted solutions that are hard to maintain. A few minutes of design saves hours of refactoring.
 
@@ -37,6 +45,15 @@ Before writing any code, assess the task complexity:
 Before coding, write the plan into a file:
 
 - Create a properly named file based on the task (e.g., `implementation-plan.md`)
+    * if applicable, put each module/subtask in its own file and link
+      them in the plan for easier navigation
+- Ask user for example inputs and expected outputs to clarify
+  requirements if not provided sufficiently; in the format asking one
+  question at a time, and wait for the answer before asking the next
+  question.
+- Include a list of test cases with expected outputs, and ask the user
+  to confirm if they are correct, which can be used as test cases for
+  writing test code.
 - Let the user review and approve the plan before starting implementation
 - Include the overall strategy, the subtasks, and implementation details for each subtask
 - Use the plan as a roadmap during development
@@ -142,6 +159,23 @@ During planning and coding:
 
 **Why this matters**: Guessing wrong wastes time. A quick question now prevents hours of rework later.
 
+### 11. Language-specific guidelines
+
+- **Python**: Follow PEP 8 style guide, use type hints, and leverage
+  Python's standard library, and check this
+  [file](references/python-guide.md) for more Python-specific
+  guidelines
+- **R**: Follow the tidyverse style guide, use vectorized operations, and
+  leverage R's built-in functions for data manipulation, also check
+  this [file](references/R-guide.md) for more R-specific guidelines
+- **Bash**: Use shellcheck to lint scripts, follow best practices for
+  quoting and variable usage, and avoid unnecessary subshells
+- For all languages:
+  * add option --version to scripts to print version information,
+    following semantic versioning (MAJOR.MINOR.PATCH)
+  * update the version number in the script header when making changes
+  * add option --help to scripts to print usage information
+
 ## Workflow Summary
 
 When a task arrives:
@@ -175,6 +209,12 @@ This skill applies to most coding tasks, but is especially valuable for:
 - Collaborative development where maintainability matters
 
 Remember: These are guidelines, not rigid rules. Use judgment to adapt them to your specific situation.
+
+## Problem Patterns
+
+Common coding patterns and solutions for recurring problems:
+
+- **[File Parsing with Row Classification](references/pattern-file-parsing.md)**: Efficient approaches for parsing large files where different rows need different processing
 
 ## Related Resources
 
