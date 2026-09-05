@@ -48,6 +48,17 @@ Guidelines and best practices for modern software development and AI-assisted co
   - Context management for AI agents
   - Surgical code editing and maintenance
 
+### Job Transition
+
+Skills and utilities for managing career transitions, compensation records, and employment documentation.
+
+- **[parse_adp_gross_pay](./job-transition/parse_adp_gross_pay/)** - Extract pay dates, gross pay amounts, and source line numbers from ADP paystub PDFs into a structured CSV/table using `pdftotext`. Covers:
+  - Checking prerequisites (`pdftotext` and Python)
+  - Interactive confirmation of target fields (e.g., pay period, pay date, gross pay)
+  - Script-based extraction preserving column alignments and recording source line numbers
+  - Strict validation and error handling for missing required fields
+  - User verification workflow comparing extracted figures against converted text layouts
+
 ---
 
 ## Installation
@@ -164,6 +175,7 @@ This repository organizes skills into categories to make it easier to find and i
 | **r-lib** | R package development and learning workflows with the r-lib ecosystem |
 | **nextflow** | Nextflow DSL2 module and workflow development following nf-core conventions |
 | **programming** | Modern development methodologies and AI-assisted coding workflows |
+| **job-transition** | Career transitions, compensation records, and employment documentation workflows |
 
 ---
 

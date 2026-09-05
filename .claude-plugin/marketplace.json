@@ -1,7 +1,7 @@
 {
   "name": "agent-skills",
   "owner": {
-    "name": "Zhenguo Zhang"
+    "name": "Zhenguo Zhang",
     "email": "zhangz.sci@gmail.com"
   },
   "metadata": {
@@ -15,8 +15,17 @@
       "source": "./",
       "strict": false,
       "skills": [
-        "./r-lib/learn-R",
+        "./r-lib/learn-R"
       ]
     },
+    {
+      "name": "job-transition",
+      "description": "Collection of skills for job transition and compensation records",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./job-transition/parse_adp_gross_pay"
+      ]
+    }
   ]
 }
